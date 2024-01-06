@@ -47,16 +47,18 @@ I recommend to use Visual Studio Code to run the tests.
 - config file `playwright.config.ts`
 - enable second browser
   ```javascript
- {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-
+      [
+        {
+        name: 'webkit',
+        use: { ...devices['Desktop Safari'] },
+      },
+      ],
   ```
 - enable video on fail
   ```javascript
-  use: {
-      video: {'retain-on-failure'},
+  
+      use: {
+        video: {'retain-on-failure'},
   },
   ```
 - enable Trace Viewer only on fail
