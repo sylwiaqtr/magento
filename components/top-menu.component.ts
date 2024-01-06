@@ -3,8 +3,7 @@ import { Page, expect } from "@playwright/test";
 export class TopMenuComponent{
     constructor(private page: Page) {}
 
-    shoppingCart = this.page.locator('//a//span[text()="My Cart"]');
-    shoppingCart2 = this.page.getByRole('link', {name: 'My Cart'});
+    shoppingCart = this.page.getByRole('link', {name: 'My Cart'});
     cartSubTotal = this.page.locator('//div[@class="subtotal"]//span[@class="price"]');
     noOfItemsInCart = this.page.locator('//span[@class="counter-number"]');
     editCart = this.page.getByRole("link", { name: "View and Edit Cart" });
@@ -72,7 +71,7 @@ export class TopMenuComponent{
 
     async goToCheckout(){
         await expect(this.sumOfItemsInShoppingCart).toContainText(/[1-9][0-9]*/, {timeout: 15000});
-        await this.shoppingCart2.click();
+        await this.shoppingCart.click();
         await this.goToCheckoutButton.click();
         await this.page.waitForLoadState();
         await expect(this.page).toHaveURL('https://magento.softwaretestingboard.com/checkout/#shipping', {timeout: 5000});
