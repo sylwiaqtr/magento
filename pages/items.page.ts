@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
 
 export class ItemsPage {
   constructor(private page: Page) {}
@@ -10,6 +10,7 @@ export class ItemsPage {
   addToCartButton = this.page.getByRole("button", {name: "Add to Cart",});
   price = this.page.locator("span.price-wrapper");
   addToWishlistButton = this.page.getByLabel("Add to Wish List");
+  messageBanner = this.page.getByRole("alert");
   
 
   async drawItem(): Promise<Locator> {
@@ -27,9 +28,9 @@ export class ItemsPage {
     const colors = randomItem.locator('div[aria-label="Color"] > div');
     const addToCart = randomItem.getByRole("button", { name: "Add to Cart" });
 
-    await sizes.first().hover();
     await sizes.first().click({ force: true });
     await colors.first().click({ force: true });
+    await randomItem.hover();
     await addToCart.click({ force: true });
 
     return Number(
@@ -69,4 +70,4 @@ export class ItemsPage {
 
     return itemName;
   }
-}
+};

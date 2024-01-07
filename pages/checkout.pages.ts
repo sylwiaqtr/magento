@@ -1,6 +1,4 @@
 import { Page, expect } from "@playwright/test";
-import exp from "constants";
-
 export class CheckoutPages {
   constructor(private page: Page) {}
 
@@ -35,4 +33,4 @@ export class CheckoutPages {
   async getOrderNumber(): Promise<string> {
     return this.orderNumber.innerText();
   }
-}
+};

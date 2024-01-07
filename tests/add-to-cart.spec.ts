@@ -1,9 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { SignInPage } from "../pages/sign-in.page";
 import { TopMenuComponent } from "../components/top-menu.component";
 import { ItemsPage } from "../pages/items.page";
 import { ShoppingcartPage } from "../pages/shoppingcart.page";
-import { email, password } from "../consts/consts";
 
 test.describe("adding to cart tests", () => {
   let topMenu: TopMenuComponent;
@@ -22,17 +20,22 @@ test.describe("adding to cart tests", () => {
     await shoppingCartPage.removeItemsFromShoppingCart();
   });
 
-  test("adding to cart random items", async ({ page }) => {
-    let price1;
-    let price2;
-    let sum;
-    let expectedPrice;
+  test("adding to cart random items", async () => {
+    let price1: number;
+    let price2: number;
+    let sum: string;
+    let expectedPrice: string;
 
     await topMenu.goToWomenPants();
     price1 = await itemsPage.addToCartRandomItem();
 
+    await expect(itemsPage.messageBanner).toBeVisible({timeout: 7000});
+
     await topMenu.goToWomenJackets();
     price2 = await itemsPage.addToCartRandomItem();
+
+    await expect(itemsPage.messageBanner).toBeVisible({timeout: 7000});
+
     sum = (price1 + price2).toFixed(2);
     expectedPrice = `$${sum}`;
 
@@ -41,10 +44,10 @@ test.describe("adding to cart tests", () => {
     });
   });
 
-  test("adding several pieces of one item to cart", async ({ page }) => {
-    let price;
-    let sum;
-    let expectedPrice;
+  test("adding several pieces of one item to cart", async () => {
+    let price: number;
+    let sum: string;
+    let expectedPrice: string;
     const quantity = Math.floor(Math.random() * 20) + 1;
 
     await topMenu.goToMenTees();

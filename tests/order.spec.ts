@@ -4,12 +4,14 @@ import { TopMenuComponent } from "../components/top-menu.component";
 import { ItemsPage } from "../pages/items.page";
 import { CheckoutPages } from "../pages/checkout.pages";
 import { email, password } from "../consts/consts";
+import { ShoppingcartPage } from "../pages/shoppingcart.page";
 
 test.describe("making order tests", () => {
   let signInPage: SignInPage;
   let topMenu: TopMenuComponent;
   let items: ItemsPage;
   let checkoutPages: CheckoutPages;
+  let shoppingCartPage: ShoppingcartPage;
 
   test.beforeEach(async ({ page }) => {
     signInPage = new SignInPage(page);
@@ -20,18 +22,23 @@ test.describe("making order tests", () => {
     await signInPage.signIn(email, password);
   });
 
-  test("successful order", async ({ page }) => {
+  test.afterEach(async ({ page }) => {
+    shoppingCartPage = new ShoppingcartPage(page);
+    await shoppingCartPage.removeItemsFromShoppingCart();
+  });
+
+  test("successful order", async () => {
     test.setTimeout(80000);
     
     const expectedAdress =
     /\bSylwia\b|\bSqtr\b|\bColorful\b|\bLublin, lubelskie 20-520\b|\bPoland\b|\b000000000\b/;
+    let price: number;
+    let orderTotal: string;
+    let orderNumber: string;
     const shippingCost = 5;
     const shippingMethod = "Flat Rate - Fixed";
     const orderNumberLength = 9;
     const successfullOrderText = "Thank you for your purchase!";
-    let price;
-    let orderTotal;
-    let orderNumber;
     
     await topMenu.goToWomenJackets();
     price = await items.addToCartRandomItem();

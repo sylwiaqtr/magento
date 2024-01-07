@@ -101,4 +101,4 @@ export class RegistrationPage {
     await this.passwordInput.fill(password);
     await this.createAccountButton.click({ force: true });
   }
-}
+};

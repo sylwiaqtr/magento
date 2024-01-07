@@ -76,4 +76,4 @@ export class TopMenuComponent{
         await this.page.waitForLoadState();
         await expect(this.page).toHaveURL('https://magento.softwaretestingboard.com/checkout/#shipping', {timeout: 5000});
       }
-}
+};

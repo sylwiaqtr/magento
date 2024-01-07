@@ -21,12 +21,12 @@ test.describe("adding to wishlist tests", () => {
     await signInPage.signIn(email, password);
   });
 
-  test.afterEach(async ({ page }) => {
+  test.afterEach(async () => {
     await wishlistPage.removeItemsFromWishlist();
   });
 
   test("adding accessories to wishlist", async ({ page }) => {
-    let itemName;
+    let itemName: string;
     const expectedMessage =
       "has been added to your Wish List. Click here to continue shopping.";
     const url = /\/magento.softwaretestingboard.com\/wishlist\b/;

@@ -10,4 +10,4 @@ export class Homepage{
     infoForLoggedIn = this.page.locator('(//span[@class="logged-in"])[1]');
     alertMessage = this.page.getByRole('alert').locator('div>div').first();
     hyperlinkAlertMessage = this.alertMessage.getByRole('link');
-}
+};

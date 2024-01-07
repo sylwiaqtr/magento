@@ -20,7 +20,7 @@ test.describe("registration tests", () => {
     homepage.createAccountButton.click();
   });
 
-  test("successful registration", async ({ page }) => {
+  test("successful registration", async () => {
     const expectedLoginMessage = `Welcome, ${firstName} ${lastName}!`;
     const expectedThankYouMessage =
       "Thank you for registering with Main Website Store.";
@@ -34,7 +34,7 @@ test.describe("registration tests", () => {
     await expect(homepage.alertMessage).toHaveText(expectedThankYouMessage);
   });
 
-  test("unsuccessful registration with registered email", async ({ page }) => {
+  test("unsuccessful registration with registered email", async () => {
     const expectedHyperlinkLabel = "click here";
     const expectedErrorMessage = `There is already an account with this email address. If you are sure that it is your email address, ${expectedHyperlinkLabel} to get your password and access your account.`;
     const expectedHyperlink =
@@ -53,9 +53,7 @@ test.describe("registration tests", () => {
     );
   });
 
-  test("unsuccessful registration with too short password", async ({
-    page,
-  }) => {
+  test("unsuccessful registration with too short password", async () => {
     const shortPassword = "Pass123";
     const expectedPasswordError =
       "Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored.";
@@ -72,7 +70,7 @@ test.describe("registration tests", () => {
     );
   });
 
-  test("unsuccessful registration with invalid password", async ({ page }) => {
+  test("unsuccessful registration with invalid password", async () => {
     const invalidPasswords = [
       "Password",
       "password1",
@@ -96,9 +94,7 @@ test.describe("registration tests", () => {
     }
   });
 
-  test("unsuccessful registration with two different passwords", async ({
-    page,
-  }) => {
+  test("unsuccessful registration with two different passwords", async () => {
     const confirmationPassword = "Examplepass123.";
     const passwordConfirmationErrorMssg = "Please enter the same value again.";
 
@@ -116,9 +112,7 @@ test.describe("registration tests", () => {
     );
   });
 
-  test("unsuccessful registration without populating first name", async ({
-    page,
-  }) => {
+  test("unsuccessful registration without populating first name", async () => {
     const missingFieldErrorMssg = "This is a required field.";
 
     await registrationPage.registerWithoutFirstName(lastName, unregisteredEmail, password);
@@ -129,9 +123,7 @@ test.describe("registration tests", () => {
     );
   });
 
-  test("unsuccessful registration without populating last name", async ({
-    page,
-  }) => {
+  test("unsuccessful registration without populating last name", async () => {
     const missingFieldErrorMssg = "This is a required field.";
 
     await registrationPage.registerWithoutLastName(firstName, unregisteredEmail, password);
@@ -142,9 +134,7 @@ test.describe("registration tests", () => {
     );
   });
 
-  test("unsuccessful registration without populating email address", async ({
-    page,
-  }) => {
+  test("unsuccessful registration without populating email address", async () => {
     const missingFieldErrorMssg = "This is a required field.";
 
     await registrationPage.registerWithoutEmail(firstName, lastName, password);
@@ -155,9 +145,7 @@ test.describe("registration tests", () => {
     );
   });
 
-  test("unsuccessful registration without populating password", async ({
-    page,
-  }) => {
+  test("unsuccessful registration without populating password", async () => {
     const missingFieldErrorMssg = "This is a required field.";
 
     await registrationPage.registerWithoutPassword(
@@ -173,9 +161,7 @@ test.describe("registration tests", () => {
     );
   });
 
-  test("unsuccessful registration without populating confirmation password", async ({
-    page,
-  }) => {
+  test("unsuccessful registration without populating confirmation password", async () => {
     const missingFieldErrorMssg = "This is a required field.";
 
     await registrationPage.registerWithoutConfirmationPassword(

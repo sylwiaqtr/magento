@@ -17,7 +17,7 @@ test.describe("login tests", () => {
     homepage.signInButton.click();
   });
 
-  test("successful login", async ({ page }) => {
+  test("successful login", async () => {
     const expectedLoginMessage = `Welcome, ${firstName} ${lastName}!`;
 
     await signInPage.signIn(email, password);
@@ -27,7 +27,7 @@ test.describe("login tests", () => {
     await expect(homepage.infoForLoggedIn).toHaveText(expectedLoginMessage);
   });
 
-  test("unsuccessful login with invalid email", async ({ page }) => {
+  test("unsuccessful login with invalid email", async () => {
     const invalidEmail = faker.internet.email();
 
     await signInPage.signIn(invalidEmail, password);
